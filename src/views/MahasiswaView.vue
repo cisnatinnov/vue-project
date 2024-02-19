@@ -87,7 +87,14 @@
     isList.value = false
     isAdd.value = true
     isEdit.value = false
-    form.value = {}
+    form.value = {
+      nama: '',
+      jenis_kelamin: 'Pria',
+      alamat: '',
+      tgl_lahir: '',
+      mata_kuliah: [],
+      sks: ''
+    }
     label.value = 'Tambah'
   }
 
