@@ -21,29 +21,27 @@
     </table>
   </div>
   <div id="list" v-if="isEdit || isAdd">
-    <form>
-      <TextField type="text" v-model="form.nama"/>
-      <DateField type="datetime-local" v-model="form.tgl_lahir"/>
-      <TextAreaField v-model="form.alamat"/>
-      <TextField type="radio" v-model="form.jenis_kelamin" value="Pria"/> Pria
-      <TextField type="radio" v-model="form.jenis_kelamin" value="Wanita"/> Wanita
-      <a href="javascript::void()" @click.prevent="addMatKul">Tambah</a>
-      <table>
-        <tr v-for="(ls, idx) in form.mata_kuliah">
-          <td>
-            <TextField type="text" v-model="ls.nama"/>
-          </td>
-          <td><a href="javascript::void()" @click.prevent="delMatKul(idx)">Hapus</a></td>
-        </tr>
-      </table>
-      <Upload
-        accept=".docx, doc, .xlsx, xls, pdf"
-        @file="files"
-      />
-      <a :href="href" v-if="isFile">SKS</a>
+    <TextField type="text" v-model="form.nama"/>
+    <DateField type="datetime-local" v-model="form.tgl_lahir"/>
+    <TextAreaField v-model="form.alamat"/>
+    <TextField type="radio" v-model="form.jenis_kelamin" value="Pria"/> Pria
+    <TextField type="radio" v-model="form.jenis_kelamin" value="Wanita"/> Wanita
+    <a href="javascript::void()" @click.prevent="addMatKul">Tambah</a>
+    <table>
+      <tr v-for="(ls, idx) in form.mata_kuliah">
+        <td>
+          <TextField type="text" v-model="ls.nama"/>
+        </td>
+        <td><a href="javascript::void()" @click.prevent="delMatKul(idx)">Hapus</a></td>
+      </tr>
+    </table>
+    <Upload
+      accept=".docx, doc, .xlsx, xls, pdf"
+      @file="files"
+    />
+    <a :href="href" v-if="isFile">SKS</a>
 
-      <button type="submit" @click="submit">Save</button>
-    </form>
+    <button @click.prevent="submit">Save</button>
   </div>
 </template>
 
@@ -87,6 +85,7 @@
     isList.value = false
     isAdd.value = true
     isEdit.value = false
+    isFile.value = false
     form.value = {
       nama: '',
       jenis_kelamin: 'Pria',
@@ -156,6 +155,7 @@
   }
 
   const files = (link) => {
+    isFile.value = true
     form.value.sks = link
   }
 
