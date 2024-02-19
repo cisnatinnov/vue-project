@@ -9,10 +9,6 @@ const store = createStore({
   state () {
     return {
       count: 0,
-      id: 0,
-      jwt: '',
-      email: '',
-      username: ''
     }
   },
   mutations: {
@@ -20,25 +16,7 @@ const store = createStore({
       state.count++
     }
   },
-  actions: {
-    async setValue({ state }, key, value) {
-      switch (key) {
-        case 'id':
-          state.id = value
-          break;
-        case 'email':
-          state.email = value
-          break;
-        case 'username':
-          state.username = value
-          break;
-      
-        default:
-          state.jwt = value
-          break;
-      }
-    }
-  }
+  actions: {}
 })
 import App from './App.vue'
 import router from './router'

@@ -1,22 +1,27 @@
 <template>  
-  <ckeditor :editor="editor" v-model="value"></ckeditor>
+  <ckeditor :editor="editor" v-model="computedValue"></ckeditor>
 </template>
 
 <script setup>
-  import { onMounted, ref } from 'vue'
+  import { computed, ref } from 'vue'
   import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
   const props = defineProps({
-    value: {
+    modelValue: {
       type: String,
-      default: `<p>ni adalah global component dari text area</p>`
+      default: ``
     }
   })
 
-  const value = ref('')
+
   const editor = ref(ClassicEditor)
 
-  onMounted(() => {
-    value.value = props.value
+  const emit = defineEmits(['update:modelValue'])
+
+  const computedValue = computed({
+    get: () => props.modelValue,
+    set: (value) => {
+      emit('update:modelValue', value)
+    }
   })
 </script>

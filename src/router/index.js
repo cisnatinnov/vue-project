@@ -24,6 +24,14 @@ const router = createRouter({
       // this generates a separate chunk (Form.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/FormView.vue')
+    },
+    {
+      path: '/mahasiswa',
+      name: 'mahasiswa',
+      // route level code-splitting
+      // this generates a separate chunk (Mahasiswa.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/MahasiswaView.vue')
     }
   ]
 })

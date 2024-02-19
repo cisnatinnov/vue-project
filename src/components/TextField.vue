@@ -1,24 +1,27 @@
 <template>
-  <input :type="type" name="text" id="tex" v-model="value">
+  <input :type="type" name="text" id="tex" v-model="computedValue">
 </template>
 
 <script setup>
-  import { onMounted, ref } from 'vue'
+  import { computed } from 'vue';
 
   const props = defineProps({
-    value: {
-      type: String,
-      default: `ini adalah global component dari text field`
-    },
     type: {
       type: String,
-      default: `text`
+      default: ''
+    },
+    modelValue: {
+      type: String,
+      default: ''
     }
   })
 
-  const value = ref('')
+  const emit = defineEmits(['update:modelValue'])
 
-  onMounted(() => {
-    value.value = props.value
+  const computedValue = computed({
+    get: () => props.modelValue,
+    set: (value) => {
+      emit('update:modelValue', value)
+    }
   })
 </script>

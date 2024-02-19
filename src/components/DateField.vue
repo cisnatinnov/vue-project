@@ -1,20 +1,27 @@
 <template>
-  <input type="date" name="date" id="date" v-model="value">
+  <input :type="type" name="date" id="date" v-model="computedValue">
 </template>
 
 <script setup>
-  import { onMounted, ref } from 'vue'
+  import { computed } from 'vue';
 
   const props = defineProps({
-    value: {
+    type: {
       type: String,
-      default: "2024-02-16",
+      default: ''
+    },
+    modelValue: {
+      type: String,
+      default: ''
     }
   })
 
-  const value = ref('')
+  const emit = defineEmits(['update:modelValue'])
 
-  onMounted(() => {
-    value.value = props.value
+  const computedValue = computed({
+    get: () => props.modelValue,
+    set: (value) => {
+      emit('update:modelValue', value)
+    }
   })
 </script>
