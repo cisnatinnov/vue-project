@@ -20,7 +20,8 @@
       </tbody>
     </table>
   </div>
-  <div id="list" v-if="isEdit || isAdd">
+  <div id="list" v-if="isEdit || isAdd">  
+    <a href="javascript::void()" @click.prevent="kembali">Kembali</a>
     <TextField type="text" v-model="form.nama"/>
     <DateField type="datetime-local" v-model="form.tgl_lahir"/>
     <TextAreaField v-model="form.alamat"/>
@@ -84,6 +85,22 @@
   const add = () => {
     isList.value = false
     isAdd.value = true
+    isEdit.value = false
+    isFile.value = false
+    form.value = {
+      nama: '',
+      jenis_kelamin: 'Pria',
+      alamat: '',
+      tgl_lahir: '',
+      mata_kuliah: [],
+      sks: ''
+    }
+    label.value = 'Tambah'
+  }
+
+  const kembali = () => {
+    isList.value = true
+    isAdd.value = false
     isEdit.value = false
     isFile.value = false
     form.value = {
