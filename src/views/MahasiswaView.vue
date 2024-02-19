@@ -27,11 +27,13 @@
       <TextAreaField v-model="form.alamat"/>
       <TextField type="radio" v-model="form.jenis_kelamin" value="Pria"/> Pria
       <TextField type="radio" v-model="form.jenis_kelamin" value="Wanita"/> Wanita
+      <a href="javascript::void()" @click.prevent="addMatKul">Tambah</a>
       <table>
-        <tr v-for="ls in form.mata_kuliah">
+        <tr v-for="(ls, idx) in form.mata_kuliah">
           <td>
             <TextField type="text" v-model="ls.nama"/>
           </td>
+          <td><a href="javascript::void()" @click.prevent="delMatKul(idx)">Hapus</a></td>
         </tr>
       </table>
       <Upload
@@ -150,6 +152,16 @@
     form.value.sks = link
   }
 
+  const addMatKul = () => {
+    form.value.mata_kuliah.push({
+      nama: ''
+    })
+  }
+
+  const delMatKul = (idx) => {
+    form.value.mata_kuliah.splice(idx, 1)
+  }
+
   const del = (id) => {
     delById(`mahasiswa`, id)
     .then((response) => {
@@ -159,7 +171,7 @@
     .catch((error) => {
       let response = error
       console.log(response)
-      list.value = []
+      getList()
     })
   }
 
